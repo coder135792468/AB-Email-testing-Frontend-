@@ -1,55 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const state: any = {
+const template: any = {
   templates: [
-    {
-      views: 10,
-      subject: "Marketing Research",
-      id: "1",
-      description: "This is email markething email. please open it",
-    },
-    {
-      views: 40,
-      subject: "Marketing Research",
-      id: "2",
-      description: "This is email markething email. please open it",
-    },
-    {
-      views: 20,
-      subject: "Marketing Research",
-      id: "3",
-      description: "This is email markething email. please open it",
-    },
-    {
-      views: 50,
-      subject: "Marketing Research",
-      id: "4",
-      description: "This is email markething email. please open it",
-    },
+    // {
+    //   _id: "6641be0ba13621409d0f5e0e",
+    //   views: 134,
+    //   createdAt: "2024-05-13T07:15:08.996Z",
+    //   subject: "Something better going up",
+    //   description:
+    //     "Hi, How are you. I want to inform that new features are coming up on our webiste be ready for that.",
+    // },
   ],
 };
 
 const templateSlice = createSlice({
   name: "template",
-  initialState: state,
+  initialState: template,
   reducers: {
+    setTemplate: (state, action) => {
+      state.templates = action.payload;
+    },
     deleteTemplate: (state, action) => {
       state.templates = state.templates.filter(
-        (state: any) => state.id !== action.payload
+        (state: any) => state._id !== action.payload
       );
 
       return state;
     },
     addTemplate: (state, action) => {
-      state.templates.push({
-        ...action.payload,
-        views: Math.floor(Math.random() * 100),
-        id: Date.now().toString(),
-      });
+      state.templates = [
+        ...state.templates,
+        {
+          ...action.payload,
+          views: Math.floor(Math.random() * 100),
+          _id: Date.now().toString(),
+        },
+      ];
       return state;
     },
   },
 });
 
-export const { deleteTemplate, addTemplate } = templateSlice.actions;
+export const { setTemplate, deleteTemplate, addTemplate } =
+  templateSlice.actions;
 export { templateSlice };

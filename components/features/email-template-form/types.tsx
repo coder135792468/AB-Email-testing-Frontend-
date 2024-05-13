@@ -6,7 +6,7 @@ export interface TEmailTemplateSchema {
 }
 
 export const emailTemplateSchema = z.object({
-  receiver: z.string().min(1, { message: "Receiver's email can't be empty" }),
+  receiver: z.string(),
   subject: z.string().min(1, { message: "Subject is required" }),
   description: z
     .string()

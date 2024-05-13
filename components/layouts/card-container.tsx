@@ -9,22 +9,18 @@ import {
 } from "@/components/ui/card";
 import { Button } from "../ui/button";
 
-export const CardContainer = ({
-  id,
-  subject,
-  description,
-  deleteTemplate,
-}: any) => {
+export const CardContainer = (props: any) => {
+  const { _id, subject, description, deleteTemplate } = props;
   const [show, setShow] = useState(false);
   return (
     <Card className="w-[90%] mx-auto my-2">
       <CardHeader>
-        <CardTitle>ID: {id}</CardTitle>
+        <CardTitle>ID: {_id}</CardTitle>
         <CardDescription>{subject}</CardDescription>
       </CardHeader>
 
       <CardFooter className="flex justify-between">
-        <Button variant="destructive" onClick={() => deleteTemplate(id)}>
+        <Button variant="destructive" onClick={() => deleteTemplate(_id)}>
           Delete
         </Button>
         <Button onClick={() => setShow(!show)}>

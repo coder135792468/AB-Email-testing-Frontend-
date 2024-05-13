@@ -3,12 +3,15 @@ import { Drawerbutton } from "./drawer-button";
 import { EmailTemplateContainer } from "../features/email-template-form/email-template-container";
 import { useAppDispatch } from "@/store/hook";
 import { addTemplate } from "@/store/slices/templateSlice";
+import { useAddTemplateMutation } from "@/store/slices/templateApiSlice";
 
 export const Header = () => {
   const dispatch = useAppDispatch();
+  const [createTemplate] = useAddTemplateMutation();
 
   const onsubmit = async (data: any) => {
     await dispatch(addTemplate(data));
+    await createTemplate(data);
   };
 
   return (
