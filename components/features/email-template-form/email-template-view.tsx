@@ -3,6 +3,7 @@ import { UseFormReturn } from "react-hook-form";
 import { TEmailTemplateSchema } from "./types";
 import { Button } from "../../ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 interface Props {
   form: UseFormReturn<TEmailTemplateSchema>;
@@ -27,6 +28,7 @@ const EmailTemplateView = ({
 }: Props) => {
   const { formState, register, handleSubmit } = form;
   const { errors } = formState;
+
   return (
     <form className={formClass} onSubmit={handleSubmit(onSubmit)}>
       {header}
@@ -34,7 +36,7 @@ const EmailTemplateView = ({
         placeholder="Receiver Email"
         {...register("receiver")}
         autoComplete={"off"}
-        className={inputClass}
+        className={cn(inputClass, "mt-2")}
       />
       {errors.receiver && (
         <div className="text-red-500 text-xs">{`${errors.receiver.message}`}</div>
@@ -59,7 +61,6 @@ const EmailTemplateView = ({
       {errors.description && (
         <div className="text-red-500 text-xs">{`${errors.description.message}`}</div>
       )}
-
       <Button type={"submit"} className={buttonClass}>
         Save Template
       </Button>
