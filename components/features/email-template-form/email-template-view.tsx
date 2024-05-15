@@ -33,7 +33,7 @@ const EmailTemplateView = ({
     <form className={formClass} onSubmit={handleSubmit(onSubmit)}>
       {header}
       <Input
-        placeholder="Receiver Email"
+        placeholder="Send to Multiple receivers i.e <email>,<email>"
         {...register("receiver")}
         autoComplete={"off"}
         className={cn(inputClass, "mt-2")}
