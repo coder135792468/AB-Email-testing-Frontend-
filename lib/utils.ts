@@ -5,10 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-function createCSV(array: any) {
+function createCSV(array: any, data: any) {
   var keys = Object.keys(array[0]);
 
   var result = "";
+  result += "Max View in Hour =," + data.hr + "\n";
   result += keys.join(",");
   result += "\n";
 
@@ -23,8 +24,8 @@ function createCSV(array: any) {
   return result;
 }
 
-export function downloadCSV(array: any) {
-  let csv = "data:text/csv;charset=utf-8," + createCSV(array);
+export function downloadCSV(array: any, data: any) {
+  let csv = "data:text/csv;charset=utf-8," + createCSV(array, data);
   let excel = encodeURI(csv);
 
   let link = document.createElement("a");

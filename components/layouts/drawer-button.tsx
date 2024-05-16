@@ -9,9 +9,9 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-export function Drawerbutton({ title, children }: any) {
+export function Drawerbutton({ title, children, open, setOpen }: any) {
   return (
-    <Drawer>
+    <Drawer onOpenChange={setOpen} open={open}>
       <DrawerTrigger asChild>
         <Button variant="outline">{title}</Button>
       </DrawerTrigger>

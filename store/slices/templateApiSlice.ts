@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { deleteTemplate } from "./templateSlice";
 
 const generateQueryStr = (baseString: string, query: Object): string => {
   const queryString: string =
@@ -32,9 +31,22 @@ export const templateApi = createApi({
         return { url: "api/templates/" + id };
       },
     }),
+    getBestTime: builder.query<any, Object>({
+      // <Type of data the call will return, Type of parameter being passed to the query function>
+      query: () => {
+        return { url: "api/mail/getmax" };
+      },
+    }),
     addTemplate: builder.mutation({
       query: (body) => ({
         url: "api/mail",
+        method: "POST",
+        body,
+      }),
+    }),
+    scheduleJob: builder.mutation({
+      query: (body) => ({
+        url: "api/schedule/mail",
         method: "POST",
         body,
       }),
@@ -50,7 +62,9 @@ export const templateApi = createApi({
 
 export const {
   useGetAllTemplatesQuery,
+  useGetBestTimeQuery,
   useGetCurrTemplateQuery,
   useAddTemplateMutation,
+  useScheduleJobMutation,
   useDeleteTemplateMutation,
 } = templateApi;

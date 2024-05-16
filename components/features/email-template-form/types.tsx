@@ -3,6 +3,7 @@ export interface TEmailTemplateSchema {
   receiver: string;
   subject: string;
   description: string;
+  checked?: boolean;
 }
 
 export const emailTemplateSchema = z.object({
@@ -11,4 +12,5 @@ export const emailTemplateSchema = z.object({
   description: z
     .string()
     .min(10, { message: "Description must have atleast 10 letters." }),
+  checked: z.boolean().optional(),
 });

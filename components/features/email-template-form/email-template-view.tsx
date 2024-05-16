@@ -4,6 +4,8 @@ import { TEmailTemplateSchema } from "./types";
 import { Button } from "../../ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useEffect } from "react";
 
 interface Props {
   form: UseFormReturn<TEmailTemplateSchema>;
@@ -26,9 +28,12 @@ const EmailTemplateView = ({
   buttonClass,
   ...props
 }: Props) => {
-  const { formState, register, handleSubmit } = form;
+  const { formState, register, handleSubmit, setValue } = form;
   const { errors } = formState;
 
+  useEffect(() => {
+    setValue("checked", false);
+  }, [form]);
   return (
     <form className={formClass} onSubmit={handleSubmit(onSubmit)}>
       {header}
@@ -60,6 +65,24 @@ const EmailTemplateView = ({
       />
       {errors.description && (
         <div className="text-red-500 text-xs">{`${errors.description.message}`}</div>
+      )}
+      <div className="flex items-center space-x-2 mb-3">
+        <Checkbox
+          id="terms"
+          {...register("checked")}
+          onCheckedChange={(checked: boolean) => {
+            setValue("checked", checked);
+          }}
+        />
+        <label
+          htmlFor="terms"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Schedule this mail (Optional)
+        </label>
+      </div>
+      {errors.checked && (
+        <div className="text-red-500 text-xs mb-4">{`${errors.checked.message}`}</div>
       )}
       <Button type={"submit"} className={buttonClass}>
         Save Template
